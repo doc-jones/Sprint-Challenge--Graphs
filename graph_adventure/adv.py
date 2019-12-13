@@ -26,6 +26,16 @@ player = Player("Name", world.startingRoom)
 graph = dict()
 traversalPath = list()
 
+def opposite(direction):
+    if direction == 'n':
+        return 's'
+    elif direction == 's':
+        return 'n'
+    elif direction == 'e':
+        return 'w'
+    elif direction == 'w':
+        return 'e'
+
 def bfs(graph, start_vert):
     queue = Queue()
     queue.put([start_vert])
@@ -50,6 +60,7 @@ def bfs(graph, start_vert):
 
     return None
 
+# Traverse the graph
 while len(graph) != len(roomGraph):
     current = player.currentRoom.id
 
@@ -76,7 +87,16 @@ while len(graph) != len(roomGraph):
             current = player.currentRoom.id
             break
 
+    map_keys = bfs(graph, player.currentRoom.id)
 
+    if map_keys is not None:
+        for room in map_keys:
+            for direction in graph[current]:
+                if graph[current][direction] == room:
+                    traversalPath.append(direction)
+                    player.travel(direction)
+
+            current = player.currentRoom.id
 
 # TRAVERSAL TEST
 visited_rooms = set()
