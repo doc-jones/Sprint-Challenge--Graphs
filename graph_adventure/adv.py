@@ -26,6 +26,24 @@ player = Player("Name", world.startingRoom)
 graph = dict()
 traversalPath = list()
 
+def bfs(graph, start_vert):
+    queue = Queue()
+    queue.put([start_vert])
+    visited = set()
+
+    while not queue.empty():
+        path = queue.get()
+        vertex = path[-1]
+        if vertex not in visited:
+            visited.add(vertex)
+
+            for room_exit in graph[vertex]:
+                if graph[vertex][room_exit] == '?':
+                    return path
+
+
+
+
 
 # TRAVERSAL TEST
 visited_rooms = set()
