@@ -3,6 +3,7 @@ from player import Player
 from world import World
 
 import random
+from queue import Queue
 
 # Load world
 world = World()
@@ -21,7 +22,9 @@ player = Player("Name", world.startingRoom)
 
 
 # FILL THIS IN
-traversalPath = ['n', 's']
+# Explicit traversal path
+graph = dict()
+traversalPath = list()
 
 
 # TRAVERSAL TEST
