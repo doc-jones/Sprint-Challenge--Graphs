@@ -37,9 +37,18 @@ def bfs(graph, start_vert):
         if vertex not in visited:
             visited.add(vertex)
 
+            # find exit with value '?'
             for room_exit in graph[vertex]:
                 if graph[vertex][room_exit] == '?':
                     return path
+
+            for x in graph[vertex]:
+                adjacent_room = graph[vertex][x]
+                new_path = path.copy()
+                new_path.append(adjacent_room)
+                queue.put(new_path)
+
+    return None
 
 
 
