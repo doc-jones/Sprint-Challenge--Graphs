@@ -50,6 +50,14 @@ def bfs(graph, start_vert):
 
     return None
 
+while len(graph) != len(roomGraph):
+    current = player.currentRoom.id
+
+    if current not in graph:
+        graph[current] = {i: '?' for i in player.currentRoom.getExits()}
+
+    room_exit = None
+
 
 
 
