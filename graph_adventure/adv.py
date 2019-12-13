@@ -58,7 +58,23 @@ while len(graph) != len(roomGraph):
 
     room_exit = None
 
+    for direction in graph[current]:
+        if graph[current][direction] == '?':
+            room_exit = direction
 
+            if room_exit is not None:
+                traversalPath.append(room_exit)
+                player.travel(room_exit)
+
+                if player.currentRoom.id not in graph:
+                    graph[player.currentRoom.id] = {
+                        i: '?' for i in player.currentRoom.getExits()
+                    }
+
+            graph[current][room_exit] = player.currentRoom.id
+            graph[player.currentRoom.id][opposite(room_exit)] = current
+            current = player.currentRoom.id
+            break
 
 
 
